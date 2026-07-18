@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rizal Historical Quiz</title>
+
+<style>
+body{
+    font-family: "Georgia", serif;
+    background:#f4ecd8;
+    color:#3b2f2f;
+    margin:0;
+    padding:30px;
+}
+.container{
+    max-width:900px;
+    margin:auto;
+    background:#fff8e7;
+    padding:30px;
+    border:8px double #8b5a2b;
+    box-shadow:0 0 20px rgba(0,0,0,.3);
+}
+h1{
+    text-align:center;
+    color:#6b3e26;
+}
+.question{
+    margin-bottom:25px;
+    padding:15px;
+    border-left:6px solid #8b5a2b;
+    background:#faf5e6;
+}
+button{
+    display:block;
+    margin:20px auto;
+    padding:12px 30px;
+    background:#8b5a2b;
+    color:white;
+    border:none;
+    cursor:pointer;
+    font-size:16px;
+}
+button:hover{
+    background:#6b3e26;
+}
+#result{
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>📜 José Rizal Historical Quiz<br><small>Spanish Colonial Era</small></h1>
+
+<form id="quiz"></form>
+
+<button onclick="checkQuiz()">Submit Quiz</button>
+
+<div id="result"></div>
+</div>
+
+<script>
+
+const questions = [
+
+{
+q:"1. What was the complete name of Dr. Rizal?",
+choices:[
+"José Protasio Rizal Mercado y Alonso Realonda",
+"José Rizal Bonifacio Mercado",
+"José Protacio Mercado y Luna",
+"José Mercado Rizal y Burgos"],
+answer:0
+},
+
+{
+q:"2. What was Rizal's nickname?",
+choices:["Juan","Pepe","Andres","Simoun"],
+answer:1
+},
+
+{
+q:"3. Rizal was born in:",
+choices:["Manila","Calamba, Laguna","Dapitan","Cavite"],
+answer:1
+},
+
+{
+q:"4. Rizal specialized in which field of medicine?",
+choices:["Dentistry","Cardiology","Ophthalmology","Neurology"],
+answer:2
+},
+
+{
+q:"5. Which event deeply influenced Rizal in 1872?",
+choices:[
+"Philippine Revolution",
+"Execution of GomBurZa",
+"Founding of Katipunan",
+"Battle of Mactan"],
+answer:1
+},
+
+{
+q:"6. Why did Rizal study ophthalmology?",
+choices:[
+"To become famous",
+"To cure his mother's eyesight",
+"To work in Spain",
+"To join the army"],
+answer:1
+},
+
+{
+q:"7. Which novel exposed abuses of Spanish friars?",
+choices:[
+"Mi Ultimo Adios",
+"Noli Me Tangere",
+"La Solidaridad",
+"Filipinas Dentro de Cien Años"],
+answer:1
+},
+
+{
+q:"8. Where was Noli Me Tangere published?",
+choices:[
+"Madrid",
+"Berlin",
+"Paris",
+"Manila"],
+answer:1
+},
+
+{
+q:"9. Which novel was inspired by the execution of GomBurZa?",
+choices:[
+"Noli Me Tangere",
+"El Filibusterismo",
+"Mi Ultimo Adios",
+"La Liga Filipina"],
+answer:1
+},
+
+{
+q:"10. Rizal became a leading figure of the:",
+choices:[
+"Katipunan",
+"Propaganda Movement",
+"Illustrado Army",
+"Revolutionary Council"],
+answer:1
+},
+
+{
+q:"11. Rizal wrote extensively for:",
+choices:[
+"El Renacimiento",
+"La Solidaridad",
+"Diario de Manila",
+"Kalayaan"],
+answer:1
+},
+
+{
+q:"12. What organization did Rizal establish in 1892?",
+choices:[
+"Katipunan",
+"La Liga Filipina",
+"Kilusang Mayo Uno",
+"GomBurZa Society"],
+answer:1
+},
+
+{
+q:"13. Where was Rizal exiled?",
+choices:[
+"Palawan",
+"Dapitan",
+"Ilocos",
+"Bohol"],
+answer:1
+},
+
+{
+q:"14. Who led the Katipunan?",
+choices:[
+"Emilio Aguinaldo",
+"Andres Bonifacio",
+"Marcelo del Pilar",
+"Paciano Rizal"],
+answer:1
+},
+
+{
+q:"15. What poem did Rizal write before his execution?",
+choices:[
+"Mi Ultimo Adios",
+"A Mi Patria",
+"Sa Kabata",
+"To the Flowers"],
+answer:0
+},
+
+{
+q:"16. Rizal was executed in:",
+choices:[
+"Cebu",
+"Bagumbayan",
+"Vigan",
+"Intramuros"],
+answer:1
+},
+
+{
+q:"17. Rizal believed education was the key to:",
+choices:[
+"Wealth",
+"Freedom and progress",
+"Political power",
+"Military strength"],
+answer:1
+},
+
+{
+q:"18. Which social ideal emphasizes equal treatment regardless of race?",
+choices:[
+"Nationalism",
+"Justice",
+"Equality",
+"Patriotism"],
+answer:2
+},
+
+{
+q:"19. Rizal preferred what method of achieving reforms?",
+choices:[
+"Violent revolution",
+"Peaceful reforms",
+"Foreign invasion",
+"Military dictatorship"],
+answer:1
+},
+
+{
+q:"20. Rizal envisioned a society where government officials were:",
+choices:[
+"Wealthy",
+"Honest",
+"Foreign",
+"Military leaders"],
+answer:1
+},
+
+{
+q:"21. Which law requires the study of Rizal's life and works?",
+choices:[
+"RA 7160",
+"RA 1425",
+"RA 9003",
+"RA 6713"],
+answer:1
+},
+
+{
+q:"22. Who sponsored the Rizal Law?",
+choices:[
+"Claro M. Recto and Jose P. Laurel Sr.",
+"Andres Bonifacio and Emilio Jacinto",
+"Manuel Quezon and Sergio Osmeña",
+"Emilio Aguinaldo and Apolinario Mabini"],
+answer:0
+},
+
+{
+q:"23. Which essay predicted the Philippines' future?",
+choices:[
+"Sobre La Indolencia",
+"Filipinas Dentro de Cien Años",
+"La Liga Filipina",
+"Mi Ultimo Adios"],
+answer:1
+},
+
+{
+q:"24. Rizal believed Filipinos should be proud of their:",
+choices:[
+"Wealth",
+"Colonial rulers",
+"National identity",
+"Foreign traditions"],
+answer:2
+},
+
+{
+q:"25. Rizal's greatest weapon against Spanish colonial oppression was his:",
+choices:[
+"Sword",
+"Army",
+"Pen and writings",
+"Political office"],
+answer:2
+}
+
+];
+
+const form=document.getElementById("quiz");
+
+questions.forEach((item,index)=>{
+    let html=`<div class="question">
+    <h3>${item.q}</h3>`;
+
+    item.choices.forEach((choice,i)=>{
+        html+=`
+        <label>
+        <input type="radio" name="q${index}" value="${i}">
+        ${choice}
+        </label><br>`;
+    });
+
+    html+="</div>";
+    form.innerHTML+=html;
+});
+
+function checkQuiz(){
+
+event.preventDefault();
+
+let score=0;
+
+questions.forEach((item,index)=>{
+    const ans=document.querySelector(`input[name=q${index}]:checked`);
+    if(ans && Number(ans.value)===item.answer)
+        score++;
+});
+
+document.getElementById("result").innerHTML=
+`You scored <strong>${score}</strong> out of <strong>${questions.length}</strong>.`;
+
+window.scrollTo({
+top:document.body.scrollHeight,
+behavior:"smooth"
+});
+
+}
+
+</script>
+
+</body>
+</html>
